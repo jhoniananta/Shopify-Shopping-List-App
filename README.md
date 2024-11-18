@@ -1,7 +1,8 @@
 # shopify_shopping_list_app
 
-A new Flutter project.
+Aplikasi Shopify Shopping List membantu pengguna membuat dan mengelola daftar belanjaan dengan mudah untuk pengalaman belanja yang lebih terorganisir.
 
+Link Figma dapat diakses: [Figma](https://www.figma.com/design/UYg73i1FwAJw2Gar6qHw3F/Design-App-Shopify%3A-List-Belanjaan?node-id=0-1&t=MNz6IzK6UnhgFKiA-1)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
