@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopify_shopping_list_app/screens/home_list_page.dart';
+import 'package:shopify_shopping_list_app/screens/new_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Text('Hello world')
-        ),
+      home: HomeListPage(),
     );
   }
 }
