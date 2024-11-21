@@ -67,6 +67,9 @@ flutter:
     - assets/landing.png
     - assets/tengah.png
     - assets/kanan.png
+    - assets/onboarding/arrow.png
+    - assets/onboarding/landing.png
+    - assets/onboarding/phonecart.png
 
   fonts:
     - family: Baloo

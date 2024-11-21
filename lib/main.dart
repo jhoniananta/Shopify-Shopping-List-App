@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:shopify_shopping_list_app/screens/home_list_page.dart';
 import 'package:shopify_shopping_list_app/screens/new_list.dart';
+import 'package:shopify_shopping_list_app/screens/onboarding_page1.dart';
+import 'package:shopify_shopping_list_app/screens/onboarding_page2.dart';
 import 'package:shopify_shopping_list_app/screens/onboarding_3.dart';
 import 'package:shopify_shopping_list_app/screens/onboarding_4.dart';
 import 'package:shopify_shopping_list_app/screens/profile_page.dart';
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: OnboardingScreen4(),
+      home: OnboardingPage1(),
     );
   }
 }
