@@ -9,7 +9,7 @@ class NewList extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: ProfileCard(),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
       ),
       body: Center(

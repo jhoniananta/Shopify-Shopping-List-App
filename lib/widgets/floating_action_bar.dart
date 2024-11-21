@@ -7,7 +7,7 @@ class CustomFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        
+        Navigator.pushNamed(context, '/newList');
       },
       backgroundColor: Colors.grey.withOpacity(0.4),
       elevation: 0,

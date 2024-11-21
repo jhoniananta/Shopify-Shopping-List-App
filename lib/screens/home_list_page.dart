@@ -24,7 +24,7 @@ class HomeListPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.0),
-                border: Border.all(color: Colors.grey.shade200, width: 0.5),
+                border: Border.all(color: Colors.grey.shade400, width: 0.5),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,

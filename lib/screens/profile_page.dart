@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import '../data/account_data.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/bottom_navbar.dart';
 
 class MyProfile extends StatelessWidget {
   // final Account account;
@@ -9,7 +13,9 @@ class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           title: Text(
             'Account',
             textAlign: TextAlign.left,
@@ -43,7 +49,7 @@ class MyProfile extends StatelessWidget {
           height: 675,
           padding: EdgeInsets.fromLTRB(40, 20, 40, 0.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Center(
                 child: Column(
@@ -150,16 +156,19 @@ class MyProfile extends StatelessWidget {
                                 child: Text(
                               accounts[0].listDone.toString(),
                               style: TextStyle(fontSize: 22),
-                            ))
-                          ],
-                        ),
+                            )
+                          )
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ));
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavbar(),
+    );
   }
 }

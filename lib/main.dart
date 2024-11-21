@@ -1,13 +1,8 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
-import 'package:shopify_shopping_list_app/screens/home_list_page.dart';
-import 'package:shopify_shopping_list_app/screens/new_list.dart';
-import 'package:shopify_shopping_list_app/screens/onboarding_page1.dart';
-import 'package:shopify_shopping_list_app/screens/onboarding_page2.dart';
-import 'package:shopify_shopping_list_app/screens/onboarding_3.dart';
-import 'package:shopify_shopping_list_app/screens/onboarding_4.dart';
-import 'package:shopify_shopping_list_app/screens/profile_page.dart';
+import 'routes/routes_app.dart';
+import '../screens/onboarding_page1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,12 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Shopify List App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: OnboardingPage1(),
+      home: const OnboardingPage1(),
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }

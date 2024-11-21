@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopify_shopping_list_app/screens/onboarding_page2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -79,7 +78,7 @@ class OnboardingPage1 extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/home');
                       },
                       child: const Text(
                         'Skip',
@@ -92,12 +91,7 @@ class OnboardingPage1 extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(  
-                            builder: (context) => const OnboardingPage2(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, '/onBoardingPage2');
                       },
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),

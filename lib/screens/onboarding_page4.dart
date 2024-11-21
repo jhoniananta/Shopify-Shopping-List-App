@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,7 +38,7 @@ class OnboardingScreen4 extends StatelessWidget {
               children: [
                 // Bagian Atas (Text Heading)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40), // Atur padding kiri-kanan
+                  padding: const EdgeInsets.symmetric(horizontal: 35), 
                   child: Column(
                     children: [
                       const SizedBox(height: 60),
@@ -71,7 +73,6 @@ class OnboardingScreen4 extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -87,38 +88,65 @@ class OnboardingScreen4 extends StatelessWidget {
                     ),
                     // Tombol Skip, kanan.png, dan Next
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(40, 0, 40, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
                             onPressed: () {
-                              // Fungsi Skip
+                              Navigator.pushNamed(context, '/home');
                             },
                             child: const Text(
                               'Skip',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 color: Colors.white,
+                                fontFamily: 'Inter',
                               ),
                             ),
                           ),
-                          Image.asset(
-                            'assets/kanan.png',
-                            height: 40,
+                          Row(
+                            children: [
+                              const SizedBox(width: 6),
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              Container(
+                                width: 12,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
+                            ],
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              // Fungsi tombol Next
+                              Navigator.pushNamed(context, '/home');
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
-                              padding: const EdgeInsets.all(12),
-                              backgroundColor: Colors.white, // Warna tombol
+                              backgroundColor: Colors.white,
                             ),
-                            child: const Icon(
-                              Icons.arrow_forward, // Ikon panah
-                              color: Color(0xFF7F56D9), // Warna ikon
+                            child: Image.asset(
+                              'assets/onboarding/arrow.png',
+                              width: 48,
+                              height: 48,
                             ),
                           ),
                         ],

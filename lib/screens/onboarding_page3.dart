@@ -1,4 +1,5 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+//page3
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -13,13 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const OnboardingPage2(),
+      home: const OnboardingScreen3(),
     );
   }
 }
 
-class OnboardingPage2 extends StatelessWidget {
-  const OnboardingPage2({Key? key}) : super(key: key);
+class OnboardingScreen3 extends StatelessWidget {
+  const OnboardingScreen3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,12 @@ class OnboardingPage2 extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
+          // Background Image
           Image.asset(
-            'assets/onboarding/landing.png',
+            'assets/landing.png', // Ganti dengan nama gambar background Anda
             fit: BoxFit.cover,
           ),
+          // Content
           SafeArea(
             child: Center(
               child: Container(
@@ -38,47 +41,45 @@ class OnboardingPage2 extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center, // Agar elemen rata tengah
                   children: [
+                    // Teks dengan padding kiri dan kanan
                     Padding(
-                      padding: const EdgeInsets.only(left: 24.0, top: 55.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Welcome',
-                            style: const TextStyle(
-                              fontFamily: 'Baloo',
-                              fontSize: 65,
-                              height: 1.1,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 1),
-                          Text(
-                            "we're glad that\nyou are here!",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              wordSpacing: 1.4,
-                              height: 1.2,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0, left: 20.0),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          'assets/onboarding/phonecart.png',
-                          width: MediaQuery.of(context).size.width * 1.5,
-                          fit: BoxFit.contain,
+                      padding: const EdgeInsets.fromLTRB(12, 55, 12, 0), // Padding kanan kiri
+                      child: Text(
+                        'Organize Your Shopping, Simplified',
+                        style: TextStyle(
+                          fontFamily: 'Baloo', // Sesuaikan dengan font Anda
+                          fontSize: 34,
+                          height: 1.2, // Jarak antar baris
+                          color: Colors.white,
                         ),
+                        textAlign: TextAlign.center, // Rata tengah
                       ),
                     ),
+                    const SizedBox(height: 28),
+                    // Teks kedua dengan padding kiri dan kanan
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40), // Padding kanan kiri
+                      child: Text(
+                        'Buat daftar belanjaan Anda dengan mudah',
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center, // Rata tengah
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    // Gambar keranjang belanjaan
+                    Image.asset(
+                      'assets/keranjang.png', // Ganti dengan nama file gambar Anda
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                      semanticLabel: 'Shopping illustration',
+                    ),
+                    const SizedBox(height: 50),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Row(
@@ -99,6 +100,15 @@ class OnboardingPage2 extends StatelessWidget {
                           ),
                           Row(
                             children: [
+                              const SizedBox(width: 6),
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.5),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
                               Container(
                                 width: 12,
                                 height: 6,
@@ -116,20 +126,11 @@ class OnboardingPage2 extends StatelessWidget {
                                   shape: BoxShape.circle,
                                 ),
                               ),
-                              const SizedBox(width: 6),
-                              Container(
-                                width: 6,
-                                height: 6,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.5),
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
                             ],
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/onBoardingPage3');
+                              Navigator.pushNamed(context, '/onBoardingPage4');
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),

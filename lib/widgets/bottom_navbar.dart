@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class BottomNavbar extends StatelessWidget {
@@ -41,27 +43,36 @@ class NavigationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize
-          .min, // Memastikan widget hanya mengambil ruang seminimal mungkin.
-      children: [
-        Image.asset(
-          iconPath,
-          width: 40,
-          height: 40,
-          fit: BoxFit.contain,
-        ),
-        const SizedBox(height: 5), // Memberi jarak antara ikon dan teks.
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Inter', // Menggunakan font Inter
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        if (label == 'Lists') {
+          Navigator.pushNamed(context, '/home');
+        } else {
+          Navigator.pushNamed(context, '/profile');
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize
+            .min, // Memastikan widget hanya mengambil ruang seminimal mungkin.
+        children: [
+          Image.asset(
+            iconPath,
+            width: 40,
+            height: 40,
+            fit: BoxFit.contain,
           ),
-        ),
-      ],
+          const SizedBox(height: 5), // Memberi jarak antara ikon dan teks.
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 13,
+              fontFamily: 'Inter', // Menggunakan font Inter
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
