@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shopify_shopping_list_app/widgets/bottom_navbar.dart';
 import 'package:shopify_shopping_list_app/widgets/floating_action_bar.dart';
 import '../widgets/profile.dart'; 
 
@@ -72,7 +73,8 @@ class HomeListPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: CustomFloatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: const BottomNavbar()
     );
   }
 }

@@ -71,6 +71,8 @@ flutter:
     - assets/onboarding/arrow.png
     - assets/onboarding/landing.png
     - assets/onboarding/phonecart.png
+    - assets/navbar/list.png
+    - assets/navbar/profile.png
 
   fonts:
     - family: Baloo
