@@ -80,7 +80,7 @@ class NewList extends StatelessWidget {
               Column(
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.pushNamed(context, "/itemList");},
                     child: Text(
                       'Create List',
                       style: TextStyle(
