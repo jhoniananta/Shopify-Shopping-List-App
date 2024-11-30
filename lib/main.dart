@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shopify_shopping_list_app/firebase_options.dart';
+import 'package:shopify_shopping_list_app/screens/home_list_page.dart';
 import 'routes/routes_app.dart';
 import '../screens/onboarding_page1.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const OnboardingPage1(),
+      home: HomeListPage(),
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }

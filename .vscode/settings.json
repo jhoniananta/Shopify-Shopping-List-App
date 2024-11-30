@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Users/yoga/Documents/Programming/Flutter/shopify_shopping_list_app/windows"
+  "cmake.sourceDirectory": "C:/Users/yoga/Documents/Programming/Flutter/shopify_shopping_list_app/windows",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
