@@ -106,8 +106,8 @@ class OnboardingScreen4 extends StatelessWidget {
                             ),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const SizedBox(width: 6),
                               Container(
                                 width: 6,
                                 height: 6,
@@ -125,6 +125,7 @@ class OnboardingScreen4 extends StatelessWidget {
                                   shape: BoxShape.circle,
                                 ),
                               ),
+                              const SizedBox(width: 6),
                               Container(
                                 width: 12,
                                 height: 6,

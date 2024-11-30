@@ -98,6 +98,7 @@ class OnboardingPage2 extends StatelessWidget {
                             ),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
                                 width: 12,
