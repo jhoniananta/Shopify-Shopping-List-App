@@ -38,6 +38,8 @@ dependencies:
   google_fonts: ^6.2.1
   font_awesome_flutter: ^10.8.0
   flutter_svg: ^2.0.14
+  firebase_storage: ^12.3.6
+  cloud_firestore: ^5.5.0
 
 dev_dependencies:
   flutter_test:
