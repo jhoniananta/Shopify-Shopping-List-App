@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shopify_shopping_list_app/models/list.dart';
+import 'package:shopify_shopping_list_app/routes/routes_app.dart';
 import 'package:shopify_shopping_list_app/services/firestore.dart';
 import 'package:shopify_shopping_list_app/widgets/profile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -122,12 +123,16 @@ class NewList extends StatelessWidget {
                       final title = _titleController.text;
                       final category = _categoryController.text;
                       if (title.isNotEmpty && category.isNotEmpty) {
-                        final ListItem _listItem = ListItem(  
-                            category: category,
-                            title: title,
-                            items: new Map<String, Item>());
-                        await _firestoreService.createList(_listItem);
-                        Navigator.pushNamed(context, "/itemList");
+                        try {
+                          final ListItem _listItem = ListItem(
+                              category: category, title: title, items: []);
+                          final id =
+                              await _firestoreService.createList(_listItem);
+                          Navigator.pushNamed(context, AppRoutes.itemList,
+                              arguments: {"id": id});
+                        } catch (e) {
+                          print("Error Creating List $e");
+                        }
                       } else {
                         showDialog(
                           context: context,

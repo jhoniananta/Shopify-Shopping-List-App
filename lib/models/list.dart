@@ -2,7 +2,7 @@ class ListItem {
   final String? id;
   final String title;
   final String category;
-  final Map<String, Item> items;
+  final List<Item> items;
 
   ListItem(
       {this.id,
@@ -14,7 +14,7 @@ class ListItem {
     return {
       'title': title,
       'category': category,
-      'items': items.map((key, value) => MapEntry(key, value.toMap())),
+      'items': items.map((item) => item.toMap()).toList(),
     };
   }
 }
@@ -22,7 +22,7 @@ class ListItem {
 class Item {
   String id;
   String name;
-  String quantity;
+  int quantity;
   String unit;
   bool isDone;
 
