@@ -19,6 +19,20 @@ class FirestoreService {
     }
   }
 
+  Future<void> updateCheckboxItem(String id, int index, bool isDone) async {
+    try {
+      final docSnapshot = await listCollection.doc(id).get();
+      final data = docSnapshot.data() as Map<String, dynamic>;
+      final items = data['items'] as List<dynamic>;
+
+      items[index]['isDone'] = !isDone;
+      await listCollection.doc(id).update({'items': items});
+    } catch (e) {
+      print(e);
+      throw Exception("Failed to update checkbox item");
+    }
+  }
+
   Stream<QuerySnapshot> getLists() {
     return listCollection.snapshots();
   }
