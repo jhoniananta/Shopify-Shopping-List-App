@@ -20,14 +20,12 @@ class ListItem {
 }
 
 class Item {
-  String id;
   String name;
   int quantity;
   String unit;
   bool isDone;
 
   Item({
-    required this.id,
     required this.name,
     required this.quantity,
     required this.unit,

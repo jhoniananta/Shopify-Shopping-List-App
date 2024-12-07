@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shopify_shopping_list_app/models/list.dart';
+import 'package:shopify_shopping_list_app/services/firestore.dart';
 
 class ItemCard extends StatefulWidget {
   final String item;
   final int quantity;
   final String unit;
   final bool isDone;
+  final Function(bool?) onCheckboxChanged;
+  
   const ItemCard({
     super.key,
     required this.item,
     required this.quantity,
     required this.unit,
     required this.isDone,
+    required this.onCheckboxChanged,
   });
   @override
   State<ItemCard> createState() => _ItemCardState();
 }
 
 class _ItemCardState extends State<ItemCard> {
+  FirestoreService _firestoreService = FirestoreService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +40,7 @@ class _ItemCardState extends State<ItemCard> {
         children: [
           Row(
             children: [
-              Checkbox(value: widget.isDone, onChanged: (bool? value) {}),
+              Checkbox(value: widget.isDone, onChanged: widget.onCheckboxChanged),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

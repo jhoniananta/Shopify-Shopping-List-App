@@ -66,12 +66,16 @@ class _ItemListState extends State<ItemList> {
                         itemCount: _itemList[0]["items"].length,
                         itemBuilder: (context, index) {
                           final item = _itemList[0]["items"][index];
-                          print(_itemList[0]["items"][index]["name"]);
+                          print(index);
                           return ItemCard(
                               item: item["name"],
                               quantity: item["quantity"],
                               unit: item["unit"],
-                              isDone: item["isDone"]);
+                              isDone: item["isDone"],
+                              onCheckboxChanged: (bool? value) {
+                                _firestoreService.updateCheckboxItem(
+                                    widget.id, index, item["isDone"]);
+                              });
                         },
                       ),
                     ),
