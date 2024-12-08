@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shopify_shopping_list_app/models/list.dart';
@@ -27,7 +29,7 @@ class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
           border: Border.all(
             width: 1,
@@ -45,12 +47,12 @@ class _ItemCardState extends State<ItemCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(widget.item,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w600,
                       )),
                   Text('${widget.quantity} ${widget.unit}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,
                       )),
@@ -58,7 +60,7 @@ class _ItemCardState extends State<ItemCard> {
               )
             ],
           ),
-          Icon(Icons.delete, color: Colors.red),
+          const Icon(Icons.delete, color: Colors.red),
         ],
       ),
     );
