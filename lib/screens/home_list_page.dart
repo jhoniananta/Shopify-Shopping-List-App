@@ -126,6 +126,9 @@ class _HomeListPageState extends State<HomeListPage> {
                         subtitle: 'List $doneItems/${listItem['items'].length} Completed',
                         tag: listItem['category'] ?? 'No category',
                         userImages: ("assets/navbar/profile.png"),
+                        onDeletePressed: () async {
+                          await _firestoreService.deleteList(listItem.id);
+                        },
                       ),
                     );
                   },
