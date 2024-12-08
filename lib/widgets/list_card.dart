@@ -1,8 +1,9 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class CardShoppingList extends StatelessWidget {
   final String title;
-  final String subtitle;
   final String tag;
   final String userImages;
   final VoidCallback? onFavoritePressed;
@@ -10,7 +11,6 @@ class CardShoppingList extends StatelessWidget {
   const CardShoppingList({
     Key? key,
     required this.title,
-    required this.subtitle,
     required this.tag,
     required this.userImages,
     this.onFavoritePressed,
@@ -56,27 +56,15 @@ class CardShoppingList extends StatelessWidget {
                       radius: 20,
                       backgroundImage: AssetImage(userImages),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        subtitle,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         const Icon(Icons.list, size: 16, color: Colors.grey),
-                        const SizedBox(width: 4),
-                        Text(
-                          subtitle,
-                          style: const TextStyle(color: Colors.grey),
-                        ),
                       ],
                     ),
                     Row(

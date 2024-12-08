@@ -40,4 +40,5 @@ class FirestoreService {
   Stream<QuerySnapshot> getListById(String id) {
     return listCollection.where('id', isEqualTo: id).snapshots();
   }
+
 }
