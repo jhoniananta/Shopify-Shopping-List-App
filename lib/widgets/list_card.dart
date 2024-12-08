@@ -5,7 +5,7 @@ class CardShoppingList extends StatelessWidget {
   final String subtitle;
   final String tag;
   final String userImages;
-  final VoidCallback? onFavoritePressed;
+  final VoidCallback? onDeletePressed;
 
   const CardShoppingList({
     Key? key,
@@ -13,7 +13,7 @@ class CardShoppingList extends StatelessWidget {
     required this.subtitle,
     required this.tag,
     required this.userImages,
-    this.onFavoritePressed,
+    this.onDeletePressed,
   }) : super(key: key);
 
   @override
@@ -42,10 +42,10 @@ class CardShoppingList extends StatelessWidget {
                     ),
                     IconButton(
                       icon: const Icon(
-                        Icons.favorite_border,
+                        Icons.delete,
                         color: Colors.purple,
                       ),
-                      onPressed: onFavoritePressed,
+                      onPressed: onDeletePressed,
                     ),
                   ],
                 ),

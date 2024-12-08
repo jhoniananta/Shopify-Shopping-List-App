@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shopify_shopping_list_app/models/list.dart';
 import 'package:shopify_shopping_list_app/services/firestore.dart';
 
@@ -11,6 +10,8 @@ class ItemCard extends StatefulWidget {
   final String unit;
   final bool isDone;
   final Function(bool?) onCheckboxChanged;
+  final VoidCallback? onDeletePressed;
+
   
   const ItemCard({
     super.key,
@@ -19,6 +20,7 @@ class ItemCard extends StatefulWidget {
     required this.unit,
     required this.isDone,
     required this.onCheckboxChanged,
+    this.onDeletePressed,
   });
   @override
   State<ItemCard> createState() => _ItemCardState();
@@ -60,7 +62,13 @@ class _ItemCardState extends State<ItemCard> {
               )
             ],
           ),
-          const Icon(Icons.delete, color: Colors.red),
+          IconButton(
+            icon: const Icon(
+              Icons.delete, 
+              color: Colors.red
+            ),
+            onPressed: widget.onDeletePressed,
+          )
         ],
       ),
     );

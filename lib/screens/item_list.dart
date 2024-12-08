@@ -69,6 +69,9 @@ class _ItemListState extends State<ItemList> {
                                 quantity: item["quantity"],
                                 unit: item["unit"],
                                 isDone: item["isDone"],
+                                onDeletePressed: () {
+                                  _firestoreService.deleteItem(widget.id, index);
+                                },
                                 onCheckboxChanged: (bool? value) {
                                   _firestoreService.updateCheckboxItem(
                                       widget.id, index, item["isDone"]);
@@ -77,7 +80,6 @@ class _ItemListState extends State<ItemList> {
                         },
                       ),
                     ),
-                    // ItemCard(item: _itemList[0]["items"][0]["name"]),
                   ],
                 ),
               );

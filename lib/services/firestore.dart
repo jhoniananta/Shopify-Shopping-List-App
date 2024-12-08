@@ -41,4 +41,27 @@ class FirestoreService {
     return listCollection.where('id', isEqualTo: id).snapshots();
   }
 
+  // Delete a list
+  Future<void> deleteList(String id) async {
+    try {
+      await listCollection.doc(id).delete();
+    } catch (e) {
+      throw Exception("Failed to delete list");
+    }
+  }
+
+  // Delete an item
+  Future<void> deleteItem(String id, int index) async {
+    try {
+      final docSnapshot = await listCollection.doc(id).get();
+      final data = docSnapshot.data() as Map<String, dynamic>;
+      final items = data['items'] as List<dynamic>;
+
+      items.removeAt(index);
+      await listCollection.doc(id).update({'items': items});
+    } catch (e) {
+      print(e);
+      throw Exception("Failed to delete item");
+    }
+  }
 }
