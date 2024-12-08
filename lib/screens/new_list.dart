@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, sort_child_properties_last
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shopify_shopping_list_app/models/list.dart';
@@ -33,7 +35,7 @@ class NewList extends StatelessWidget {
                     child: CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.grey[200],
-                        child: Stack(
+                        child: const Stack(
                           alignment: Alignment.bottomRight,
                           children: [
                             Positioned(
@@ -53,9 +55,8 @@ class NewList extends StatelessWidget {
                           ],
                         )),
                   ),
-                  SizedBox(height: 20),
-                  Container(
-                      child: Column(
+                  const SizedBox(height: 20),
+                    Column(
                     children: [
                       TextField(
                         controller: _titleController,
@@ -67,7 +68,7 @@ class NewList extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                           border: OutlineInputBorder(
@@ -78,13 +79,13 @@ class NewList extends StatelessWidget {
                           fillColor: Colors.grey[200],
                           contentPadding: EdgeInsets.fromLTRB(16, 16, 17, 16),
                         ),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14, // Ukuran teks
                           fontWeight: FontWeight.w800, // Berat teks
                           color: Colors.black, // Warna teks
                         ),
                       ),
-                      SizedBox(height: 14),
+                      const SizedBox(height: 14),
                       TextField(
                         controller: _categoryController,
                         decoration: InputDecoration(
@@ -95,7 +96,7 @@ class NewList extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                           border: OutlineInputBorder(
@@ -106,14 +107,14 @@ class NewList extends StatelessWidget {
                           fillColor: Colors.grey[200],
                           contentPadding: EdgeInsets.fromLTRB(16, 16, 17, 16),
                         ),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14, // Ukuran teks
                           fontWeight: FontWeight.w800, // Berat teks
                           color: Colors.black, // Warna teks
                         ),
                       ),
                     ],
-                  ))
+                  ),
                 ],
               ),
               Column(
@@ -153,7 +154,7 @@ class NewList extends StatelessWidget {
                         );
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       'Create List',
                       style: TextStyle(
                         fontSize: 16,
@@ -173,7 +174,7 @@ class NewList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
                 ],
               ),
             ]),

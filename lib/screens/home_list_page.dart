@@ -98,18 +98,35 @@ class _HomeListPageState extends State<HomeListPage> {
                     ),
                   );
                 }
-
+                // Shopping list data from firebase
                 final shoppingList = snapshot.data!.docs;
+
+                // Method to count done items
+                int countDoneItems(List<dynamic> items) {
+                  return items.where((item) => item['isDone'] == true).length;
+                }
+
+                // List view of shopping list cards
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: shoppingList.length,
                   itemBuilder: (context, index) {
                     final listItem = shoppingList[index];
-                    return CardShoppingList(
-                      title: listItem['title'] ?? 'No title',
-                      tag: listItem['category'] ?? 'No category',
-                      userImages: ("assets/navbar/profile.png"),
+                    final items = listItem['items'] as List<dynamic>;
+                    final doneItems = countDoneItems(items);
+                    return GestureDetector(
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/itemList',
+                        arguments: {'id': listItem.id},
+                      ),
+                      child: CardShoppingList(
+                        title: listItem['title'] ?? 'No title',
+                        subtitle: 'List $doneItems/${listItem['items'].length} Completed',
+                        tag: listItem['category'] ?? 'No category',
+                        userImages: ("assets/navbar/profile.png"),
+                      ),
                     );
                   },
                 );
