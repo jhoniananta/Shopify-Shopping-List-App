@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:shopify_shopping_list_app/screens/profile_edit_page.dart';
 import '../screens/new_list.dart';
 import '../screens/home_list_page.dart';
 import '../screens/profile_page.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
   static const newList = '/newList';
   static const home = '/home';
   static const profile = '/profile';
+  static const editProfile = '/editProfile';
   static const onBoardingPage1 = '/onBoardingPage1';
   static const onBoardingPage2 = '/onBoardingPage2';
   static const onBoardingPage3 = '/onBoardingPage3';
@@ -28,6 +30,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => NewList());
       case profile:
         return MaterialPageRoute(builder: (_) => MyProfile());
+      case editProfile:
+        return MaterialPageRoute(builder: (_) => EditProfile());
       case onBoardingPage1:
         return MaterialPageRoute(builder: (_) => OnboardingPage1());
       case onBoardingPage2:
@@ -40,13 +44,12 @@ class AppRoutes {
         final args = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(builder: (_) => ItemList(id: args['id']));
       default:
-      return MaterialPageRoute(
-        builder: (_) => Scaffold(
-          body: Center(
-            child: Text('No route defined for ${settings.name}'),
-          ),
-        )
-      );
+        return MaterialPageRoute(
+            builder: (_) => Scaffold(
+                  body: Center(
+                    child: Text('No route defined for ${settings.name}'),
+                  ),
+                ));
     }
   }
 }
