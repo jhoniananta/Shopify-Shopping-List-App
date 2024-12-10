@@ -8,17 +8,16 @@ class MyProfile extends StatefulWidget {
   _MyProfileState createState() => _MyProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _MyProfileState extends State<MyProfile> with SingleTickerProviderStateMixin {
   final FirestoreService _firestoreService = FirestoreService();
   int listMade = 0; // Total lists made
   int listDone = 0; // Total completed lists
 
   int currentIndex = 1;
+  final List<String> routes = ['/home', '/profile'];
 
-  final List<String> routes = [
-    '/home',
-    '/profile',
-  ];
+  late AnimationController _controller;
+  late Animation<double> fadeAnimation;
 
   void onTabTapped(int index) {
     if (index != currentIndex) {
@@ -33,10 +32,17 @@ class _MyProfileState extends State<MyProfile> {
   void initState() {
     super.initState();
     _fetchStats(); // Fetch list statistics on initialization
+
+    // Animation setup
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    fadeAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _controller.forward();
   }
 
   Future<void> _fetchStats() async {
-    // Fetch stats from Firestore
     final stats = await _firestoreService.calculateStats();
     setState(() {
       listMade = stats['listMade'] ?? 0;
@@ -45,152 +51,90 @@ class _MyProfileState extends State<MyProfile> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
-            icon: const Icon(Icons.arrow_back_rounded)),
-        title: Text(
-          'Account',
-          textAlign: TextAlign.left,
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
+          icon: const Icon(Icons.arrow_back_rounded, color: Colors.black),
+        ),
+        title: const Text(
+          'Profile',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         actions: [
-          TextButton(
+          IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/editProfile');
             },
-            child: const Text(
-              'Edit',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-            ),
+            icon: const Icon(Icons.settings, color: Colors.black),
           ),
         ],
-        automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<List<Account>>(
         stream: _firestoreService.getAccounts(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No account data available.'));
+            return const Center(child: Text('No account data available.'));
           }
 
-          // Assuming you want to display the first account
           final account = snapshot.data![0];
 
-          return Container(
-            padding: EdgeInsets.fromLTRB(40, 20, 40, 0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 110,
-                        height: 110,
-                        child: Center(
-                          child: ClipOval(
-                            child: Image.network(
-                              'https://via.placeholder.com/110',
-                              width: 110,
-                              height: 110,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        account.name,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        account.email,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.normal),
-                      ),
-                    ],
+          return FadeTransition(
+            opacity: fadeAnimation,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: AssetImage('assets/profilepicture.png'),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text('Tempat Lahir', style: TextStyle(fontSize: 15)),
-                    subtitle: Text(account.birthdayPlace,
-                        style: TextStyle(fontSize: 15)),
+                  const SizedBox(height: 16),
+                  Text(
+                    account.name,
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title:
-                        Text('Tanggal Lahir', style: TextStyle(fontSize: 15)),
-                    subtitle: Text(account.birthdayDate,
-                        style: TextStyle(fontSize: 15)),
+                  Text(
+                    account.email,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text('Nomor Telpon', style: TextStyle(fontSize: 15)),
-                    subtitle: Text(account.phoneNumber,
-                        style: TextStyle(fontSize: 15)),
-                  ),
-                ),
-                Container(
-                  height: 100,
-                  child: Row(
+                  const SizedBox(height: 24),
+                  Divider(color: Colors.grey[300], thickness: 1),
+                  const SizedBox(height: 16),
+                  _buildInfoCard('Tempat Lahir', account.birthdayPlace),
+                  _buildInfoCard('Tanggal Lahir', account.birthdayDate),
+                  _buildInfoCard('Nomor Telepon', account.phoneNumber),
+                  const SizedBox(height: 16),
+                  Divider(color: Colors.grey[300], thickness: 1),
+                  const SizedBox(height: 16),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 150,
-                        child: Card(
-                          child: Column(
-                            children: [
-                              Center(child: Text('Jumlah List \nyang dibuat')),
-                              SizedBox(height: 10),
-                              Center(
-                                child: Text(
-                                  listMade
-                                      .toString(), // Use dynamically calculated value
-                                  style: TextStyle(fontSize: 22),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 150,
-                        child: Card(
-                          child: Column(
-                            children: [
-                              Center(child: Text('Jumlah List \nyang selesai')),
-                              SizedBox(height: 10),
-                              Center(
-                                child: Text(
-                                  listDone
-                                      .toString(), // Use dynamically calculated value
-                                  style: TextStyle(fontSize: 22),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      _buildStatCard('Lists Created', listMade),
+                      _buildStatCard('Lists Completed', listDone),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -198,6 +142,52 @@ class _MyProfileState extends State<MyProfile> {
       bottomNavigationBar: BottomNavbar(
         activeIndex: currentIndex,
         onItemTapped: onTabTapped,
+      ),
+    );
+  }
+
+  Widget _buildInfoCard(String title, String subtitle) {
+    return Card(
+      elevation: 0,
+      color: Colors.grey[100],
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        subtitle: Text(
+          subtitle,
+          style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String title, int value) {
+    return Card(
+      elevation: 2,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.4,
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              value.toString(),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
