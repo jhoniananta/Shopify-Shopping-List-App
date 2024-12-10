@@ -69,6 +69,19 @@ class FirestoreService {
     }
   }
 
+  // Add a new item to a list
+  Future<void> addItemToList(String listId, Map<String, dynamic> newItem) async {
+    try {
+      final docRef = listCollection.doc(listId);
+      await docRef.update({
+        "items": FieldValue.arrayUnion([newItem]),
+      });
+    } catch (e) {
+      print(e);
+      throw Exception("Failed to add item to list: $e");
+    }
+  }
+
   // Accounts
   Future<void> updateAccount(
     String accountId, {
