@@ -168,7 +168,7 @@ class _ItemCardState extends State<ItemCard> {
               // Edit Button
               IconButton(
                 icon: const Icon(Icons.edit),
-                color: Colors.blue,
+                color: const Color(0xFF7F56D9),
                 splashRadius: 28,
                 onPressed: _showEditDialog,
               ),
