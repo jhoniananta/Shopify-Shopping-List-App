@@ -143,6 +143,8 @@ class NavigationItem extends StatelessWidget {
             width: 40,
             height: 40,
             fit: BoxFit.contain,
+            opacity: isActive ? AlwaysStoppedAnimation(1) : AlwaysStoppedAnimation(0.5), 
+            
           ),
           const SizedBox(height: 5),
           Text(

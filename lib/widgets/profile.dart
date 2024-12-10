@@ -21,8 +21,8 @@ class ProfileCard extends StatelessWidget {
               Navigator.pushNamed(context, '/profile');
             },
             child: ClipOval(
-              child: Image.network(
-                'https://via.placeholder.com/48',
+              child: Image(
+                image : AssetImage('assets/profilepicture.png'),
                 width: 48,
                 height: 48,
                 fit: BoxFit.cover,
