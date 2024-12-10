@@ -10,6 +10,7 @@ import '../screens/onboarding_page2.dart';
 import '../screens/onboarding_page3.dart';
 import '../screens/onboarding_page4.dart';
 import '../screens/item_list.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AppRoutes {
   static const newList = '/newList';
@@ -25,31 +26,65 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => HomeListPage());
+        return PageTransition(
+          child: HomeListPage(),
+          type: PageTransitionType.fade,
+        );
       case newList:
-        return MaterialPageRoute(builder: (_) => NewList());
+        // return MaterialPageRoute(builder: (_) => NewList());
+        return PageTransition(
+          child: NewList(),
+          type: PageTransitionType.fade,
+        );
       case profile:
-        return MaterialPageRoute(builder: (_) => MyProfile());
+        // return MaterialPageRoute(builder: (_) => MyProfile());
+        return PageTransition(
+          child: MyProfile(),
+          type: PageTransitionType.fade,
+        );
       case editProfile:
-        return MaterialPageRoute(builder: (_) => EditProfile());
+        // return MaterialPageRoute(builder: (_) => EditProfile());
+        return PageTransition(
+          child: EditProfile(),
+          type: PageTransitionType.fade,
+        );
       case onBoardingPage1:
         return MaterialPageRoute(builder: (_) => OnboardingPage1());
       case onBoardingPage2:
-        return MaterialPageRoute(builder: (_) => OnboardingPage2());
+        return PageTransition(
+          child: OnboardingPage2(),
+          type: PageTransitionType.rightToLeftWithFade,
+        );
       case onBoardingPage3:
-        return MaterialPageRoute(builder: (_) => OnboardingScreen3());
+        return PageTransition(
+          child: OnboardingScreen3(),
+          type: PageTransitionType.rightToLeftWithFade,
+        );
       case onBoardingPage4:
-        return MaterialPageRoute(builder: (_) => OnboardingScreen4());
+        return PageTransition(
+          child: OnboardingScreen4(),
+          type: PageTransitionType.rightToLeftWithFade,
+        );
       case itemList:
         final args = settings.arguments as Map<String, dynamic>;
-        return MaterialPageRoute(builder: (_) => ItemList(id: args['id']));
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              ItemList(id: args['id']),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+        );
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(
-                    child: Text('No route defined for ${settings.name}'),
-                  ),
-                ));
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
   }
 }

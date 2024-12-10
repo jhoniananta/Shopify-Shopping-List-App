@@ -22,6 +22,22 @@ class ItemList extends StatefulWidget {
 class _ItemListState extends State<ItemList> {
   final FirestoreService _firestoreService = FirestoreService();
 
+  int currentIndex = 2;
+
+  final List<String> routes = [
+    '/home',
+    '/profile',
+  ];
+
+  void onTabTapped(int index) {
+    if (index != currentIndex) {
+      setState(() {
+        currentIndex = index;
+      });
+      Navigator.pushReplacementNamed(context, routes[index]);
+    }
+  }
+
   // Form key dan TextEditingController untuk pop-up
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
@@ -73,6 +89,11 @@ class _ItemListState extends State<ItemList> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+            icon: const Icon(Icons.arrow_back_rounded)),
         title: ProfileCard(),
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
@@ -149,7 +170,10 @@ class _ItemListState extends State<ItemList> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: const BottomNavbar(),
+      bottomNavigationBar: BottomNavbar(
+        activeIndex: currentIndex,
+        onItemTapped: onTabTapped,
+      ),
     );
   }
 }

@@ -43,7 +43,7 @@ class CardShoppingList extends StatelessWidget {
                     IconButton(
                       icon: const Icon(
                         Icons.delete,
-                        color: Colors.purple,
+                        color: Color(0xFF7F56D9),
                       ),
                       onPressed: onDeletePressed,
                     ),
@@ -51,7 +51,7 @@ class CardShoppingList extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Row(
-                   children: [
+                  children: [
                     CircleAvatar(
                       radius: 20,
                       backgroundImage: AssetImage(userImages),

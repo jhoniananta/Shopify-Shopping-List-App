@@ -13,6 +13,22 @@ class _MyProfileState extends State<MyProfile> {
   int listMade = 0; // Total lists made
   int listDone = 0; // Total completed lists
 
+  int currentIndex = 1;
+
+  final List<String> routes = [
+    '/home',
+    '/profile',
+  ];
+
+  void onTabTapped(int index) {
+    if (index != currentIndex) {
+      setState(() {
+        currentIndex = index;
+      });
+      Navigator.pushReplacementNamed(context, routes[index]);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +50,11 @@ class _MyProfileState extends State<MyProfile> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+            icon: const Icon(Icons.arrow_back_rounded)),
         title: Text(
           'Account',
           textAlign: TextAlign.left,
@@ -49,6 +70,7 @@ class _MyProfileState extends State<MyProfile> {
             ),
           ),
         ],
+        automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<List<Account>>(
         stream: _firestoreService.getAccounts(),
@@ -173,7 +195,10 @@ class _MyProfileState extends State<MyProfile> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavbar(),
+      bottomNavigationBar: BottomNavbar(
+        activeIndex: currentIndex,
+        onItemTapped: onTabTapped,
+      ),
     );
   }
 }
