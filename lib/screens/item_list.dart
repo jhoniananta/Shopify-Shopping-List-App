@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shopify_shopping_list_app/widgets/bottom_navbar.dart';
-import 'package:shopify_shopping_list_app/models/list.dart';
 import 'package:shopify_shopping_list_app/services/firestore.dart';
 import 'package:shopify_shopping_list_app/widgets/item_card.dart';
 import 'package:shopify_shopping_list_app/widgets/profile.dart';
 import 'package:shopify_shopping_list_app/widgets/add_item_popup.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ItemList extends StatefulWidget {
   final String id;
@@ -107,6 +107,64 @@ class _ItemListState extends State<ItemList> {
             );
           }
           final _itemList = snapshot.data!.docs;
+
+          if (_itemList.isEmpty) {
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                      border: Border.all(
+                          color: Colors.grey.shade400, width: 0.5),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/home_assets/home_screen.svg',
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 16.0),
+                        const Text(
+                          'Start by adding items',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                        const Text(
+                          'Your items will show here. Start by adding a new item.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 100),
+                    child: SvgPicture.asset(
+                      'assets/home_assets/hand_drawn_arrow.svg',
+                      height: 150,
+                      width: 150,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
 
           return Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
