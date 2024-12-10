@@ -17,6 +17,22 @@ class HomeListPage extends StatefulWidget {
 class _HomeListPageState extends State<HomeListPage> {
   final FirestoreService _firestoreService = FirestoreService();
 
+  int currentIndex = 0;
+
+  final List<String> routes = [
+    '/home',
+    '/profile',
+  ];
+
+  void onTabTapped(int index) {
+    if (index != currentIndex) {
+      setState(() {
+        currentIndex = index;
+      });
+      Navigator.pushReplacementNamed(context, routes[index]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +42,7 @@ class _HomeListPageState extends State<HomeListPage> {
           SliverAppBar(
             backgroundColor: Colors.white,
             title: ProfileCard(),
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
             pinned: true,
             expandedHeight: 0.0,
             flexibleSpace: FlexibleSpaceBar(
@@ -123,7 +139,8 @@ class _HomeListPageState extends State<HomeListPage> {
                       ),
                       child: CardShoppingList(
                         title: listItem['title'] ?? 'No title',
-                        subtitle: 'List $doneItems/${listItem['items'].length} Completed',
+                        subtitle:
+                            'List $doneItems/${listItem['items'].length} Completed',
                         tag: listItem['category'] ?? 'No category',
                         userImages: ("assets/navbar/profile.png"),
                         onDeletePressed: () async {
@@ -140,7 +157,10 @@ class _HomeListPageState extends State<HomeListPage> {
       ),
       floatingActionButton: CustomFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: const BottomNavbar(),
+      bottomNavigationBar: BottomNavbar(
+        activeIndex: currentIndex,
+        onItemTapped: onTabTapped,
+      ),
     );
   }
 }

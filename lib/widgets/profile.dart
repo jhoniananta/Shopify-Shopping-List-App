@@ -6,12 +6,14 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(0.0, 0, 16.0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
+      width: double.infinity,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Profile picture
           GestureDetector(
@@ -62,7 +64,7 @@ class ProfileCard extends StatelessWidget {
             children: [
               Icon(
                 Icons.verified,
-                color: Colors.purple,
+                color: Color(0xFF7F56D9),
                 size: 24.0,
               ),
               const SizedBox(width: 16.0),
