@@ -37,6 +37,30 @@ class FirestoreService {
     }
   }
 
+  // New function to update an item
+  Future<void> updateItem(
+      String listId, int index, String newName, int newQuantity, String newUnit) async {
+    try {
+      final docSnapshot = await listCollection.doc(listId).get();
+      final data = docSnapshot.data() as Map<String, dynamic>;
+      final items = data['items'] as List<dynamic>;
+
+      // Update the item properties at the specified index
+      items[index] = {
+        'name': newName,
+        'quantity': newQuantity,
+        'unit': newUnit,
+        'isDone': items[index]['isDone'],  // Keep the current 'isDone' value
+      };
+
+      // Update the item list in Firestore
+      await listCollection.doc(listId).update({'items': items});
+    } catch (e) {
+      print(e);
+      throw Exception("Failed to update item");
+    }
+  }
+
   Stream<QuerySnapshot> getLists() {
     return listCollection.snapshots();
   }

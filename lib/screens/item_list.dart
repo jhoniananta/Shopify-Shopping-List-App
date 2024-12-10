@@ -52,6 +52,22 @@ class _ItemListState extends State<ItemList> {
     super.dispose();
   }
 
+  void _onEditItem(String newItem, int newQuantity, String newUnit, int index) {
+    _firestoreService
+        .updateItem(
+      widget.id, // ID list belanja
+      index, // Index item yang ingin diupdate
+      newItem,
+      newQuantity,
+      newUnit,
+    )
+        .then((_) {
+      print("Item updated successfully!");
+    }).catchError((error) {
+      print("Error updating item: $error");
+    });
+  }
+
   // Method untuk membuka pop-up dialog menggunakan AddItemPopup
   void _showAddItemDialog() {
     showDialog(
@@ -118,8 +134,8 @@ class _ItemListState extends State<ItemList> {
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.0),
-                      border: Border.all(
-                          color: Colors.grey.shade400, width: 0.5),
+                      border:
+                          Border.all(color: Colors.grey.shade400, width: 0.5),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -198,6 +214,9 @@ class _ItemListState extends State<ItemList> {
                           isDone: item["isDone"],
                           onDeletePressed: () {
                             _firestoreService.deleteItem(widget.id, index);
+                          },
+                          onEditPressed: (newItem, newQuantity, newUnit) {
+                            _onEditItem(newItem, newQuantity, newUnit, index);
                           },
                           onCheckboxChanged: (bool? value) {
                             _firestoreService.updateCheckboxItem(

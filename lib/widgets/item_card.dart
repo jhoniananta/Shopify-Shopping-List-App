@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopify_shopping_list_app/services/firestore.dart';
+import 'package:shopify_shopping_list_app/widgets/edit_item_popup.dart';
 
 class ItemCard extends StatefulWidget {
   final String item;
@@ -8,6 +9,7 @@ class ItemCard extends StatefulWidget {
   final bool isDone;
   final Function(bool?) onCheckboxChanged;
   final VoidCallback? onDeletePressed;
+  final Function(String newItem, int newQuantity, String newUnit)? onEditPressed;
 
   const ItemCard({
     super.key,
@@ -17,6 +19,7 @@ class ItemCard extends StatefulWidget {
     required this.isDone,
     required this.onCheckboxChanged,
     this.onDeletePressed,
+    this.onEditPressed,
   });
 
   @override
@@ -25,6 +28,52 @@ class ItemCard extends StatefulWidget {
 
 class _ItemCardState extends State<ItemCard> {
   FirestoreService _firestoreService = FirestoreService();
+
+  // Controllers untuk dialog edit
+  final TextEditingController _editNameController = TextEditingController();
+  final TextEditingController _editQuantityController = TextEditingController();
+  final TextEditingController _editUnitController = TextEditingController();
+
+  @override
+  void dispose() {
+    _editNameController.dispose();
+    _editQuantityController.dispose();
+    _editUnitController.dispose();
+    super.dispose();
+  }
+
+  // Method untuk menampilkan dialog edit
+  void _showEditDialog() {
+    final formKey = GlobalKey<FormState>();
+    _editNameController.text = widget.item;
+    _editQuantityController.text = widget.quantity.toString();
+    _editUnitController.text = widget.unit;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return EditItemPopup(
+          formKey: formKey,
+          nameController: _editNameController,
+          quantityController: _editQuantityController,
+          unitController: _editUnitController,
+          onSave: () {
+            if (formKey.currentState!.validate()) {
+              final newItem = _editNameController.text.trim();
+              final newQuantity =
+                  int.tryParse(_editQuantityController.text.trim()) ?? widget.quantity;
+              final newUnit = _editUnitController.text.trim();
+
+              if (widget.onEditPressed != null) {
+                widget.onEditPressed!(newItem, newQuantity, newUnit);
+              }
+              Navigator.of(context).pop();
+            }
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +114,13 @@ class _ItemCardState extends State<ItemCard> {
                   height: 28,
                   width: 28,
                   decoration: BoxDecoration(
-                    color: widget.isDone ? const Color(0xFF7F56D9) : Colors.transparent,
+                    color: widget.isDone
+                        ? const Color(0xFF7F56D9)
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(8.0),
                     border: Border.all(
-                      color: widget.isDone ? const Color(0xFF7F56D9) : Colors.grey,
+                      color:
+                          widget.isDone ? const Color(0xFF7F56D9) : Colors.grey,
                       width: 2,
                     ),
                   ),
@@ -103,19 +155,31 @@ class _ItemCardState extends State<ItemCard> {
                     '${widget.quantity} ${widget.unit}',
                     style: TextStyle(
                       fontSize: 14.0,
-                      color: widget.isDone ? Colors.grey[500] : Colors.grey[700],
+                      color:
+                          widget.isDone ? Colors.grey[500] : Colors.grey[700],
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          // Delete Button
-          IconButton(
-            icon: const Icon(Icons.delete),
-            color: Colors.redAccent,
-            splashRadius: 28,
-            onPressed: widget.onDeletePressed,
+          Row(
+            children: [
+              // Edit Button
+              IconButton(
+                icon: const Icon(Icons.edit),
+                color: Colors.blue,
+                splashRadius: 28,
+                onPressed: _showEditDialog,
+              ),
+              // Delete Button
+              IconButton(
+                icon: const Icon(Icons.delete),
+                color: Colors.redAccent,
+                splashRadius: 28,
+                onPressed: widget.onDeletePressed,
+              ),
+            ],
           ),
         ],
       ),
