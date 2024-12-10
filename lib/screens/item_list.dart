@@ -235,15 +235,29 @@ class _ItemListState extends State<ItemList> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddItemDialog,
-        backgroundColor: Colors.grey.withOpacity(0.4),
-        elevation: 0,
-        shape: const CircleBorder(),
-        child: const Icon(
-          Icons.add,
-          color: Colors.purple,
-          size: 28,
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFF9F5FF),
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.2),
+              blurRadius: 6,
+              spreadRadius: 1,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: FloatingActionButton(
+          onPressed: _showAddItemDialog, // Tindakan ketika tombol FAB ditekan
+          backgroundColor: Colors.transparent, // Membuat background transparan
+          elevation: 0, // Menghilangkan bayangan standar
+          shape: const CircleBorder(),
+          child: const Icon(
+            Icons.add,
+            color: Color(0xFF7F56D9), // Warna ikon FAB
+            size: 28,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

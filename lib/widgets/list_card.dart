@@ -26,17 +26,20 @@ class CardShoppingList extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            gradient: LinearGradient(
-              colors: [Color(0xFF7F56D9), Color(0xFFB983FF)],
+            gradient: const LinearGradient(
+              colors: [
+                Color(0xFF6D4CC9),
+                Color(0xFFA97BFF),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             boxShadow: [
               BoxShadow(
                 color: Colors.purple.withOpacity(0.2),
-                blurRadius: 12,
-                spreadRadius: 3,
-                offset: const Offset(0, 6),
+                blurRadius: 6,
+                spreadRadius: 1,
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -106,7 +109,8 @@ class CardShoppingList extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.label, size: 20, color: Colors.white70),
+                        const Icon(Icons.label,
+                            size: 20, color: Colors.white70),
                         const SizedBox(width: 6),
                         Text(
                           tag,
