@@ -137,7 +137,7 @@ class _EditProfileState extends State<EditProfile> {
                     Navigator.pop(context); // Go back to the previous page
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color(0xFF7F56D9),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
