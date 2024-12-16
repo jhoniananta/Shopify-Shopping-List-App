@@ -22,18 +22,16 @@ class ProfileCard extends StatelessWidget {
           return Center(child: Text('No user data found.'));
         }
 
-        // Assuming the first account in the list is the logged-in user's profile
         final account = snapshot.data![0];
 
         return Container(
-          padding: const EdgeInsets.fromLTRB(0, 0, 8.0, 0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0),
             color: Colors.white,
           ),
-          width: double.infinity,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Profile picture
               GestureDetector(
@@ -41,21 +39,21 @@ class ProfileCard extends StatelessWidget {
                   Navigator.pushNamed(context, '/profile');
                 },
                 child: ClipOval(
-                  child: Image(
-                    image: AssetImage('assets/profilepicture.png'),
+                  child: Image.asset(
+                    'assets/profilepicture.png',
                     width: 48,
                     height: 48,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              const SizedBox(width: 6.0),
-              // Name and email
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/profile');
-                },
-                child: Expanded(
+              SizedBox(width: 8.0),
+              // Name and email with Expanded
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -65,6 +63,7 @@ class ProfileCard extends StatelessWidget {
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
+                        overflow: TextOverflow.ellipsis, // Prevent overflow
                       ),
                       SizedBox(height: 4.0),
                       Text(
@@ -73,21 +72,23 @@ class ProfileCard extends StatelessWidget {
                           fontSize: 14.0,
                           color: Colors.grey,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(width: 16.0),
+              SizedBox(width: 8.0),
               // Icons
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.verified,
                     color: Color(0xFF7F56D9),
                     size: 24.0,
                   ),
-                  const SizedBox(width: 16.0),
+                  SizedBox(width: 8.0),
                   Icon(
                     Icons.notifications_none,
                     color: Colors.grey,
